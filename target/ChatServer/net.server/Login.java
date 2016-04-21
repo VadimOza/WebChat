@@ -21,9 +21,10 @@ public class Login extends HttpServlet {
                       HttpServletResponse response)
             throws ServletException, IOException {
         String nick = request.getParameter("username");
-
-        if(!User.AllUsers.contains(nick)){
-            User.AllUsers.add(nick);
+        User thisUser = new User(nick,request.getSession().getId(),response);
+        if(!Server.users.contains(thisUser)){
+            Server.users.add(thisUser);
+            request.getSession().getId();
             response.sendRedirect("/chat.jsp");
 
         } else {
