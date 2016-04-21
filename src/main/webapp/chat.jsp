@@ -39,11 +39,11 @@
         <h2>
             <div class="downbox">
                 <div class="container-5">
-                    <input id="msgline" name="message" type="text" placeholder="Input message...">
+                    <input id="msgline" name="message" type="text" placeholder="Input message..." autocomplete="off">
                 </div>
                 <div class="container-6">
                     <!-- <form action="SendServlet" method="post"> -->
-                    <button id="send" onclick="form.action='Server'">Send</button>
+                    <button id="send" onclick="form.action='Server';form.method='post'">Send</button>
                     <!-- </form> -->
                 </div>
             </div>
@@ -53,7 +53,7 @@
         <h1>
             <div class="box">
                 <div class="container-1">
-                    <input type="search" id="search" placeholder="&#x2004;&#x2004;&#x1F50E;"/>
+                    <input type="search" id="search" placeholder="&#x2004;&#x2004;&#x1F50E;" autocomplete="off"/>
                 </div>
             </div>
         </h1>
