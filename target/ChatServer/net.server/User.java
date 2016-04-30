@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Вадим on 12.04.2016.
  */
 public class User {
-    String nick;
-    String id;
+    private String nick;
+    private String id;
     HttpServletResponse rs;
 
     public User(String nick, String id, HttpServletResponse rs) {
