@@ -14,11 +14,42 @@
 <head>
     <link rel="stylesheet" type="text/css" href="Style/ChatStyle.css">
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="Moment.js"></script>
+    <script>moment().format();</script>
     <script type="text/javascript" src="chatScripts.js"></script>
     <title>Chat</title>
 </head>
 
 <body>
+<script>
+    var sDate;
+    var cUser;
+    $(window).load(function () {
+        sDate = moment();
+        cUser = 'Tom';
+    });
+
+    function sMessage(){
+        var msgText = $('#msgline').val();
+        var cDate = moment().format('h:mm A');
+        $("ol").append("<li class='me'><div class='avatar-icon'><img src='icon2.jpg'></div><div class='messages'><p align='left'>"+msgText+"</p><time>"+cUser+" - "+cDate+"</time></div></li>");
+        return false;
+    }
+
+    function runScript(e) {
+        if (e.keyCode == 13) {
+            sMessage();
+            return false;
+        }
+    }
+
+    $(document).ready(function(){
+        $("#send").click(function(){
+            sMessage();
+            return false;
+        });
+    });
+</script>
 
 <div style="text-align: center; align-items: flex-start">
     <form class="main">
@@ -45,92 +76,11 @@
                     <ol class='chat-box'>
                         <li class='another'>
                             <div class='avatar-icon'>
-                                <img src='icon1.png'>
+                                <img src='icon2.jpg'>
                             </div>
                             <div class='messages'>
                                 <p>Hi</p>
                                 <time datetime='2009-11-13T20:00'>Tom - 51 min</time>
-                            </div>
-                        </li>
-                        <li class='me'>
-                            <div class='avatar-icon'>
-                                <img src='icon2.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi.</p>
-                                <time datetime='2009-11-13T20:14'>37 mins</time>
-                            </div>
-                        </li>
-                        <li class='me'>
-                            <div class='avatar-icon'>
-                                <img src='icon1.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi</p>
-                                <time datetime='2009-11-13T20:00'>Tom - 51 min</time>
-                            </div>
-                        </li>
-                        <li class='me'>
-                            <div class='avatar-icon'>
-                                <img src='icon2.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi.</p>
-                                <time datetime='2009-11-13T20:14'>37 mins</time>
-                            </div>
-                        </li>
-                        <li class='another'>
-                            <div class='avatar-icon'>
-                                <img src='icon1.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hisdsdnfknskdfjnksjfnkjsnbfjbsbsfjsdbfjsdbfj</p>
-                                <time datetime='2009-11-13T20:00'>Tom - 51 min</time>
-                            </div>
-                        </li>
-                        <li class='another'>
-                            <div class='avatar-icon'>
-                                <img src='icon2.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi.</p>
-                                <time datetime='2009-11-13T20:14'>37 mins</time>
-                            </div>
-                        </li>
-                        <li class='another'>
-                            <div class='avatar-icon'>
-                                <img src='icon3.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi</p>
-                                <time datetime='2009-11-13T20:00'>Tom - 51 min</time>
-                            </div>
-                        </li>
-                        <li class='me'>
-                            <div class='avatar-icon'>
-                                <img src='icon2.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi.</p>
-                                <time datetime='2009-11-13T20:14'>37 mins</time>
-                            </div>
-                        </li>
-                        <li class='another'>
-                            <div class='avatar-icon'>
-                                <img src='icon3.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi</p>
-                                <time datetime='2009-11-13T20:00'>Tom - 51 min</time>
-                            </div>
-                        </li>
-                        <li class='me'>
-                            <div class='avatar-icon'>
-                                <img src='icon2.png'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi.</p>
-                                <time datetime='2009-11-13T20:14'>37 mins</time>
                             </div>
                         </li>
                     </ol>
@@ -143,7 +93,7 @@
                 <div class="downbox">
                     <div class="container-5">
                         <input id="msgline" name="message" type="text" placeholder="Input message..."
-                               autocomplete="off">
+                               autocomplete="off" onkeypress="return runScript(event)">
                     </div>
                     <div class="container-6">
                         <!-- <form action="SendServlet" method="post"> -->

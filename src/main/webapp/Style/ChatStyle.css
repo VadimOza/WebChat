@@ -308,7 +308,7 @@ body {
     background: white;
     margin: 0;
     height: 480px;
-    overflow-y: auto;*
+    overflow-y: auto;
 }
 
 .chat-box li {
@@ -324,7 +324,7 @@ body {
 
 .chat-box .avatar-icon img {
     display: block;
-    width: 100%;
+    width:50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -370,6 +370,8 @@ body {
 .messages p {
     font-size: 0.8rem;
     margin: 0 0 0.2rem 0;
+    max-width: 500px;
+    word-wrap: break-word;
 }
 
 .messages time {
