@@ -1,61 +1,86 @@
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedList;
+import com.sun.deploy.net.HttpResponse;
+import com.sun.deploy.util.StringUtils;
+import com.sun.xml.internal.ws.api.pipe.ThrowableContainerPropertySet;
+
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.websocket.*;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
+
+@ServerEndpoint("/login/{nick}")
+public class Login {
 
 
-public class Login extends HttpServlet {
+//    /**
+//     * @OnOpen allows us to intercept the creation of a new session.
+//     * The session class allows us to send data to the user.
+//     * In the method onOpen, we'll let the user know that the handshake was
+//     * successful.
+//     */
+//    @OnOpen
+//    public void onOpen(Session session){
+//        System.out.println(session.getId() + " has opened a connection");
+//        try {
+//            session.getBasicRemote().sendText("Connection Established");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    /**
+//     * When a user sends a message to the server, this method will intercept the message
+//     * and allow us to react to it. For now the message is read as a String.
+//     */
+//    @OnMessage
+//    public void onMessage(String message, Session session){
+//        System.out.println("Message from " + session.getId() + ": " + message);
+//        try {
+//            session.getBasicRemote().sendText(message);
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    /**
+//     * The user closes the connection.
+//     *
+//     * Note: you can't send messages to the client from this method
+//     */
+//    @OnClose
+//    public void onClose(Session session){
+//        System.out.println("Session " +session.getId()+" has ended");
+//    }
 
+    @OnOpen
+    public void onOpen(Session session, @PathParam("nick") String nick) {
+        System.out.println(nick + " try to login");
+        RemoteEndpoint.Basic writer = session.getBasicRemote();
+        try {
+            if (Server.users.contains(new User(nick, null))) {
+                writer.sendText("NO!");
+                System.out.println(nick + " error of login");
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req,resp);
+            } else {
+                writer.sendText("OK");
+                System.out.println(nick + " loging");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response)
-            throws ServletException, IOException {
-        String nick = request.getParameter("username");
-        User thisUser = new User(nick,request.getSession().getId(),response);
-        if(!Server.users.contains(thisUser)){
-            Server.users.add(thisUser);
-            request.getSession().getId();
-            response.sendRedirect("/chat.jsp");
+    @OnClose
+    public void onClose(Session session,@PathParam("nick") String nick){
+        System.out.printf(nick + " has disconected!");
 
-        } else {
-            PrintWriter pw =  response.getWriter();
-            response.setContentType("text/html");
-            pw.print("<html>\n" +
-                    "\n" +
-                    "<style>\n" +
-                    "\n" +
-                    "</style>\n" +
-                    "\n" +
-                    "<head>\n" +
-                    "    <link rel=\"stylesheet\" type=\"text/css\" href=\"Style/LoginStyle.css\">\n" +
-                    "    <title>Login</title>\n" +
-                    "</head>\n" +
-                    "\n" +
-                    "<body>\n" +
-                    "\n" +
-                    "<form action=\"LoginServlet\" method=\"get\">\n" +
-                    "    <h2>Login</h2>\n" +
-                    "    <input id=\"username\" name=\"username\" placeholder=\"Username\" type=\"text\" required>\n" +
-                    "    <input type=\"file\" name=\"file1\">\n" +
-                    "    <label >Nik is already in use</label>\n" +
-                    "    <button> Login  </button>\n" +
-                    "</form>\n" +
-                    "\n" +
-                    "</body>\n" +
-                    "\n" +
-                    "</html>");
-        }
+    }
 
-
+    @OnError
+    public void onError(Session session, Throwable throwable){
+        throwable.printStackTrace();
     }
 }

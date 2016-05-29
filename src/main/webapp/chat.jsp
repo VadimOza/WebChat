@@ -20,7 +20,7 @@
     <title>Chat</title>
 </head>
 
-<body>
+<body onload="first()">
 <script>
     var sDate;
     var cUser;
@@ -60,7 +60,7 @@
                          src="http://cs8.pikabu.ru/post_img/big/2016/03/28/7/1459160229186915267.jpg">
                 </div>
                 <div class="container-4">
-                    <label id="username">UserName</label>
+                    <label id="username"></label>
                 </div>
                 <!-- <form action="LogoutServlet" method="post"> -->
                 <div class="container-3">
@@ -97,7 +97,7 @@
                     </div>
                     <div class="container-6">
                         <!-- <form action="SendServlet" method="post"> -->
-                        <button id="send" onclick="form.action='Server';form.method='post'">Send</button>
+                        <button id="send" onclick="">Send</button>
                         <!-- </form> -->
                     </div>
                 </div>
@@ -117,6 +117,19 @@
         </iframe>
     </form> -->
 </div>
+<script type="text/javascript">
+    var webSocket;
+    function first() {
+        var nick =  localStorage.getItem("_nick");
+        document.getElementById("username").innerHTML = nick;
+        webSocket = localStorage.getItem("_webSocket");
+    }
+//
+//    function send() {
+//        var message = document.getElementById("msgline").value;
+//        webSocket.send(message);
+//    }
+</script>
 </body>
 
 </html>
