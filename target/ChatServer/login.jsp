@@ -13,7 +13,7 @@
 </style>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="Style/LoginStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/LoginStyle.css">
     <title>Login</title>
 </head>
 
@@ -43,27 +43,21 @@
             // Create a new instance of the websocket
             var url = "ws://localhost:27015/login/"+nick;
             webSocket = new WebSocket(url);
-            alert("=)");//-Без этого тупо не работает, но нужно это исправить
+            alert(url);//-Без этого тупо не работает, но нужно это исправить
 
             /**
              * Binds functions to the listeners for the websocket.
              */
             webSocket.onopen = function(event){
-                // For reasons I can't determine, onopen gets called twice
-                // and the first time event.data is undefined.
-                // Leave a comment if you know the answer.
                 if(event.data === undefined)
                     return;
-
-                //alert(event.data);
-
             };
 
             webSocket.onmessage = function(event){
-                //alert(event.data);
+                alert(event.data);
                 if(event.data === "OK"){
                     localStorage.setItem("_nick",nick);
-                    window.location="http://localhost:27015/chatTest.jsp";
+                    window.location="http://localhost:27015/chat.jsp";
                 }else{
                     alert("Error!");
                 }

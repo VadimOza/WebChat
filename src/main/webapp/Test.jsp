@@ -39,7 +39,7 @@
             return;
         }
         // Create a new instance of the websocket
-        webSocket = new WebSocket("ws://localhost:27015/echo/");
+        webSocket = new WebSocket("ws://localhost:27015/server/11");
 
         /**
          * Binds functions to the listeners for the websocket.

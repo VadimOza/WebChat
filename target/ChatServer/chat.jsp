@@ -6,130 +6,228 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
-<style>
-
-</style>
-
 <head>
-    <link rel="stylesheet" type="text/css" href="Style/ChatStyle.css">
-    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="Moment.js"></script>
-    <script>moment().format();</script>
-    <script type="text/javascript" src="chatScripts.js"></script>
+    <meta charset="UTF-8">
     <title>Chat</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/alertbox.css">
 </head>
 
-<body onload="first()">
+<body onload="openSocket()">
+<div id="sound"></div><!-- Ta Da -->
+
+<div class="container clearfix">
+    <div class="people-list" id="people-list">
+        <div class="search">
+            <input type="text" placeholder="search"/>
+            <i class="fa fa-search"></i>
+        </div>
+        <div id="user_list">
+            <ul class="list">
+                <li class="clearfix">
+                    <img style="border-radius: 50% 50% 50% 50%" src="images/o.png" alt="avatar"/>
+                    <div class="about">
+                        <div class="name">Olia Porter</div>
+                        <div class="status">
+                            <i class="fa fa-circle online"></i>online
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="chat">
+        <div class="chat-header clearfix">
+            <img style="border-radius: 50% 50% 50% 50%" src="images/o.png" alt="avatar"/>
+            <div class="chat-about">
+                <div class="chat-with">Olia Porter</div>
+                <div id="chat-num-messages" class="chat-num-messages"><p id="pcount"></p></div>
+            </div>
+        </div> <!-- end chat-header -->
+
+        <div class="chat-history">
+            <ul>
+
+                <!-- не я -->
+                <li class="clearfix">
+                    <div class="message-data align-right">
+                        <span class="message-data-time">10:10 AM, Today</span> &nbsp; &nbsp;
+                        <span class="message-data-name">Olia</span> <i class="fa fa-circle me"></i>
+                    </div>
+                    <div class="message my-message float-right">
+                        Hi Vincent
+                    </div>
+                </li>
+
+                <!-- я -->
+                <li>
+                    <div class="message-data">
+                        <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+                        <span class="message-data-time">10:12 AM, Today</span>
+                    </div>
+                    <div class="message other-message">
+                        Hi
+                    </div>
+                </li>
+
+            </ul>
+
+        </div> <!-- end chat-history -->
+
+        <div class="chat-message clearfix">
+            &nbsp;&nbsp;&nbsp;
+            <textarea name="message-to-send" id="message-to-send" placeholder="Type your message"
+                      rows="3"></textarea>
+            <div style="float:left;">
+                <button style="color: orange;" id="log_button">Log out</button>
+            </div>
+            <div style="float:right;">
+                <button style="padding-right: 0px" id="send_button" onclick="send();">Send</button>
+            </div>
+
+        </div> <!-- end chat-message -->
+
+    </div> <!-- end chat -->
+
+</div> <!-- end container -->
+
 <script>
-    var sDate;
-    var cUser;
-    $(window).load(function () {
-        sDate = moment();
-        cUser = 'Tom';
-    });
+    elements = document.querySelector("#user_list")
+            .querySelector("ul")
+            .querySelectorAll("li")
 
-    function sMessage(){
-        var msgText = $('#msgline').val();
-        var cDate = moment().format('h:mm A');
-        $("ol").append("<li class='me'><div class='avatar-icon'><img src='icon2.jpg'></div><div class='messages'><p align='left'>"+msgText+"</p><time>"+cUser+" - "+cDate+"</time></div></li>");
-        return false;
-    }
-
-    function runScript(e) {
-        if (e.keyCode == 13) {
-            sMessage();
-            return false;
+    chng = function () {
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].getElementsByClassName('name')[0].innerHTML;
         }
-    }
-
-    $(document).ready(function(){
-        $("#send").click(function(){
-            sMessage();
-            return false;
-        });
-    });
+        alert(this.getElementsByClassName('name')[0].innerHTML);
+    };
+    [].forEach.call(elements, function (el) {
+        el.onclick = chng;
+    })
 </script>
 
-<div style="text-align: center; align-items: flex-start">
-    <form class="main">
-        <h1>
-            <div class="topbox">
-                <div class="container-2">
-                    <img id="userphoto" width="80" height="80"
-                         src="http://cs8.pikabu.ru/post_img/big/2016/03/28/7/1459160229186915267.jpg">
-                </div>
-                <div class="container-4">
-                    <label id="username"></label>
-                </div>
-                <!-- <form action="LogoutServlet" method="post"> -->
-                <div class="container-3">
-                    <button id="logout" onclick="form.action='LogoutServlet'">Logout</button>
-                </div>
-                <!-- </form> -->
-            </div>
-        </h1>
-        <h3>
-            <div class="chatbox">
-                <!--  -->
-                <section class='chat-container'>
-                    <ol class='chat-box'>
-                        <li class='another'>
-                            <div class='avatar-icon'>
-                                <img src='icon2.jpg'>
-                            </div>
-                            <div class='messages'>
-                                <p>Hi</p>
-                                <time datetime='2009-11-13T20:00'>Tom - 51 min</time>
-                            </div>
-                        </li>
-                    </ol>
-                </section>
-                <!--  -->
-            </div>
-        </h3>
-        <div>
-            <h2>
-                <div class="downbox">
-                    <div class="container-5">
-                        <input id="msgline" name="message" type="text" placeholder="Input message..."
-                               autocomplete="off" onkeypress="return runScript(event)">
-                    </div>
-                    <div class="container-6">
-                        <!-- <form action="SendServlet" method="post"> -->
-                        <button id="send" onclick="">Send</button>
-                        <!-- </form> -->
-                    </div>
-                </div>
-            </h2>
+<script id="message-template" type="text/x-handlebars-template">
+    <li class="clearfix">
+        <div class="message-data align-right">
+            <span id="dt" class="message-data-time">{{time}}, {{day}}</span> &nbsp; &nbsp;
+            <span class="message-data-name">Olia</span> <i class="fa fa-circle me"></i>
         </div>
-    </form>
-    <!-- <form class="online">
-        <h1>
-        <div class="box">
-            <div class="container-1">
-                <input type="search" id="search" placeholder="&#x2004;&#x2004;&#x1F50E;" autocomplete="off"/>
-            </div>
+        <div class="message my-message float-right">
+            <!--тут вст. текст-->
+            {{messageOutput}}
         </div>
-    </h1>
-        <iframe class="useronline" scrolling="auto">
+    </li>
+</script>
 
-        </iframe>
-    </form> -->
-</div>
+<script id="joinuser" type="text/x-handlebars-template">
+    <li>
+        <div>
+            <center>
+                <hr style="width:60%;">
+                <span class="join-date">{{jointime}}</span>
+                <hr style="width:5%;">
+                <br>
+                <span class="join-name">{{username}}</span>
+                <br><br>
+            </center>
+        </div>
+    </li>
+</script>
+
+<script id="message-response-template" type="text/x-handlebars-template">
+    <li>
+        <div class="message-data">
+            <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+            <span class="message-data-time">{{time}}, {{day}}</span>
+        </div>
+        <div class="message other-message">
+            {{response}}
+        </div>
+    </li>
+</script>
+
+<div id="messages"></div>
+
 <script type="text/javascript">
     var webSocket;
-    function first() {
-        var nick =  localStorage.getItem("_nick");
-        document.getElementById("username").innerHTML = nick;
-        webSocket = localStorage.getItem("_webSocket");
-    }
-//
-//    function send() {
-//        var message = document.getElementById("msgline").value;
-//        webSocket.send(message);
-//    }
-</script>
-</body>
+    var messages = document.getElementById("messages");
 
+    function openSocket(){
+        // Ensures only one connection is open at a time
+        if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED){
+            writeResponse("WebSocket is already opened.");
+            return;
+        }
+        // Create a new instance of the websocket
+        var nick = localStorage.getItem("_nick");
+        var url = "ws://localhost:27015/server/"+nick;
+        webSocket = new WebSocket(url);
+
+        /**
+         * Binds functions to the listeners for the websocket.
+         */
+        webSocket.onOpen = function(event){
+            if(event.data === undefined)
+                return;
+            if(event.data === "NO!"){
+                webSocket.close();
+                window.location="http://localhost:27015/login.jsp";
+            }
+            writeResponse(event.data);
+        };
+
+        webSocket.onMessage = function(event){
+            alert("Boo")
+            writeResponse(event.data);
+        };
+
+        webSocket.onClose = function(event){
+            writeResponse("Connection closed");
+        };
+    }
+
+    /**
+     * Sends the value of the text input to the server
+     */
+    function send(){
+        alert("S")
+        var text = document.getElementById("message-to-send").value;
+        document.getElementById("message-to-send").value = "";
+        webSocket.send(text);
+    }
+
+    function closeSocket(){
+        alert("CS")
+        webSocket.close();
+    }
+
+    function writeResponse(text){
+        alert("WR "+text)
+        var templateResponse = Handlebars.compile($("#message-response-template").html());
+        var contextResponse = {
+            response: text,
+            time: 0,
+            day: 0
+        };
+
+
+        this.$chatHistory = $('.chat-history');
+        this.$chatHistoryList = this.$chatHistory.find('ul');
+
+        this.$chatHistoryList.append(templateResponse(contextResponse));
+        this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
+    }
+</script>
+
+<script src='js/jquery.min.js'></script>
+<script src='js/handlebars.min.js'></script>
+<script src='js/list.min.js'></script>
+<script src="js/index.js"></script>
+</body>
 </html>
