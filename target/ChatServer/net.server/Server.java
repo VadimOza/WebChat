@@ -3,6 +3,8 @@ import com.sun.deploy.util.StringUtils;
 
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import javax.servlet.*;
@@ -56,6 +58,14 @@ public class Server {
 //        System.out.println("Session " +session.getId()+" has ended");
 //    }
 
+    public String getDate() {
+        Calendar c = new GregorianCalendar();
+        String[] day = new String[]{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+        return day[(c.get(Calendar.DAY_OF_WEEK)) - 1] + " - " + sdf.format(cal.getTime());
+    }
+
     @OnOpen
     public void onOpen(Session session, @PathParam("nick") String nick) {
         System.out.println(nick + " enter chat");
@@ -67,6 +77,7 @@ public class Server {
 
             } else {
                 users.add(new User(nick, session));
+                allMessages.add("{{newuser}}" + nick + "{{/newuser}}{{date}}" + getDate() + "{{/date}}");
                 for (String str :
                         allMessages) {
                     session.getBasicRemote().sendText(str);
@@ -81,7 +92,7 @@ public class Server {
 
     @OnMessage
     public void onMessage(String message, Session session, @PathParam("nick") String nick) {
-        message = nick + ": " + message + "\n";
+        message = "{{username}}" + nick + "{{/username}}" + "{{mes}}" + message;
         if (allMessages.size() == 50) {
             allMessages.poll();
             allMessages.add(message);
@@ -103,7 +114,7 @@ public class Server {
     }
 
     @OnError
-    public void onError(Session session, Throwable throwable){
+    public void onError(Session session, Throwable throwable) {
         System.out.println("Окно было закрыто");
     }
 }

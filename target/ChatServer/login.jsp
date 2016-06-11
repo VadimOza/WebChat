@@ -54,7 +54,7 @@
             };
 
             webSocket.onmessage = function(event){
-                alert(event.data);
+//                alert(event.data);
                 if(event.data === "OK"){
                     localStorage.setItem("_nick",nick);
                     window.location="http://localhost:27015/chat.jsp";

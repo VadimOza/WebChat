@@ -15,9 +15,11 @@
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/alertbox.css">
+    <%--<meta name="viewport" content="width=device-width">--%>
 </head>
 
-<body onload="openSocket()">
+<body>
+
 <div id="sound"></div><!-- Ta Da -->
 
 <div class="container clearfix">
@@ -45,36 +47,14 @@
         <div class="chat-header clearfix">
             <img style="border-radius: 50% 50% 50% 50%" src="images/o.png" alt="avatar"/>
             <div class="chat-about">
-                <div class="chat-with">Olia Porter</div>
+                <div class="chat-with"><p id="usernameepta"></p></div>
                 <div id="chat-num-messages" class="chat-num-messages"><p id="pcount"></p></div>
             </div>
         </div> <!-- end chat-header -->
 
         <div class="chat-history">
             <ul>
-
-                <!-- не я -->
-                <li class="clearfix">
-                    <div class="message-data align-right">
-                        <span class="message-data-time">10:10 AM, Today</span> &nbsp; &nbsp;
-                        <span class="message-data-name">Olia</span> <i class="fa fa-circle me"></i>
-                    </div>
-                    <div class="message my-message float-right">
-                        Hi Vincent
-                    </div>
-                </li>
-
-                <!-- я -->
-                <li>
-                    <div class="message-data">
-                        <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-                        <span class="message-data-time">10:12 AM, Today</span>
-                    </div>
-                    <div class="message other-message">
-                        Hi
-                    </div>
-                </li>
-
+                <%--Message--%>
             </ul>
 
         </div> <!-- end chat-history -->
@@ -87,7 +67,7 @@
                 <button style="color: orange;" id="log_button">Log out</button>
             </div>
             <div style="float:right;">
-                <button style="padding-right: 0px" id="send_button" onclick="send();">Send</button>
+                <button style="padding-right: 0px" id="send_button">Send</button>
             </div>
 
         </div> <!-- end chat-message -->
@@ -95,6 +75,9 @@
     </div> <!-- end chat -->
 
 </div> <!-- end container -->
+
+<!-- Server responses get written here -->
+<div id="messages"></div>
 
 <script>
     elements = document.querySelector("#user_list")
@@ -116,11 +99,11 @@
     <li class="clearfix">
         <div class="message-data align-right">
             <span id="dt" class="message-data-time">{{time}}, {{day}}</span> &nbsp; &nbsp;
-            <span class="message-data-name">Olia</span> <i class="fa fa-circle me"></i>
+            <span class="message-data-name">{{user}}</span> <i class="fa fa-circle me"></i>
         </div>
         <div class="message my-message float-right">
             <!--тут вст. текст-->
-            {{messageOutput}}
+            {{message}}
         </div>
     </li>
 </script>
@@ -143,91 +126,86 @@
 <script id="message-response-template" type="text/x-handlebars-template">
     <li>
         <div class="message-data">
-            <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+            <span class="message-data-name"><i class="fa fa-circle online"></i>{{user}}</span>
             <span class="message-data-time">{{time}}, {{day}}</span>
         </div>
         <div class="message other-message">
-            {{response}}
+            {{message}}
         </div>
     </li>
 </script>
 
-<div id="messages"></div>
-
-<script type="text/javascript">
-    var webSocket;
-    var messages = document.getElementById("messages");
-
-    function openSocket(){
-        // Ensures only one connection is open at a time
-        if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED){
-            writeResponse("WebSocket is already opened.");
-            return;
-        }
-        // Create a new instance of the websocket
-        var nick = localStorage.getItem("_nick");
-        var url = "ws://localhost:27015/server/"+nick;
-        webSocket = new WebSocket(url);
-
-        /**
-         * Binds functions to the listeners for the websocket.
-         */
-        webSocket.onOpen = function(event){
-            if(event.data === undefined)
-                return;
-            if(event.data === "NO!"){
-                webSocket.close();
-                window.location="http://localhost:27015/login.jsp";
-            }
-            writeResponse(event.data);
-        };
-
-        webSocket.onMessage = function(event){
-            alert("Boo")
-            writeResponse(event.data);
-        };
-
-        webSocket.onClose = function(event){
-            writeResponse("Connection closed");
-        };
-    }
-
-    /**
-     * Sends the value of the text input to the server
-     */
-    function send(){
-        alert("S")
-        var text = document.getElementById("message-to-send").value;
-        document.getElementById("message-to-send").value = "";
-        webSocket.send(text);
-    }
-
-    function closeSocket(){
-        alert("CS")
-        webSocket.close();
-    }
-
-    function writeResponse(text){
-        alert("WR "+text)
-        var templateResponse = Handlebars.compile($("#message-response-template").html());
-        var contextResponse = {
-            response: text,
-            time: 0,
-            day: 0
-        };
+<%--<script type="text/javascript">--%>
+        <%--var webSocket;--%>
+        <%--var messages = document.getElementById("messages");--%>
 
 
-        this.$chatHistory = $('.chat-history');
-        this.$chatHistoryList = this.$chatHistory.find('ul');
+        <%--function openSocket(){--%>
+            <%--// Ensures only one connection is open at a time--%>
+            <%--if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED){--%>
+                <%--writeResponse("WebSocket is already opened.");--%>
+                <%--return;--%>
+            <%--}--%>
+            <%--// Create a new instance of the websocket--%>
+            <%--var nick = localStorage.getItem("_nick");--%>
+            <%--var url = "ws://localhost:27015/server/"+nick;--%>
+            <%--webSocket = new WebSocket(url);--%>
+    <%----%>
+            <%--/**--%>
+             <%--* Binds functions to the listeners for the websocket.--%>
+             <%--*/--%>
+            <%--webSocket.onopen = function(event){--%>
+                <%--// For reasons I can't determine, onopen gets called twice--%>
+                <%--// and the first time event.data is undefined.--%>
+                <%--// Leave a comment if you know the answer.--%>
+                <%--if(event.data === undefined)--%>
+                    <%--return;--%>
+                <%--if(event.data === "NO!"){--%>
+                    <%--webSocket.close();--%>
+                    <%--window.location="http://localhost:27015/login.jsp";--%>
+                <%--}--%>
+                <%--writeResponse(event.data);--%>
+            <%--};--%>
+    <%----%>
+            <%--webSocket.onmessage = function(event){--%>
+                <%--writeResponse(event.data);--%>
+            <%--};--%>
+    <%----%>
+            <%--webSocket.onclose = function(event){--%>
+                <%--writeResponse("Connection closed");--%>
+            <%--};--%>
+        <%--}--%>
+        <%--function send(){--%>
+            <%--var text = document.getElementById("message-to-send").value;--%>
+            <%--document.getElementById("message-to-send").value = "";--%>
+            <%--webSocket.send(text);--%>
+        <%--}--%>
+    <%----%>
+        <%--function closeSocket(){--%>
+            <%--webSocket.close();--%>
+        <%--}--%>
 
-        this.$chatHistoryList.append(templateResponse(contextResponse));
-        this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
-    }
-</script>
+        <%--function writeResponse(text){--%>
+            <%--var templateResponse = Handlebars.compile($("#message-response-template").html());--%>
+            <%--var contextResponse = {--%>
+                <%--response: text,--%>
+                <%--time: 0,--%>
+                <%--day: 0--%>
+            <%--};--%>
+    <%----%>
+    <%----%>
+            <%--this.$chatHistory = $('.chat-history');--%>
+            <%--this.$chatHistoryList = this.$chatHistory.find('ul');--%>
+    <%----%>
+            <%--this.$chatHistoryList.append(templateResponse(contextResponse));--%>
+            <%--this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);--%>
+        <%--}--%>
+<%--</script>--%>
 
 <script src='js/jquery.min.js'></script>
 <script src='js/handlebars.min.js'></script>
 <script src='js/list.min.js'></script>
 <script src="js/index.js"></script>
+
 </body>
 </html>
