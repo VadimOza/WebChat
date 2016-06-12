@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c833d0b-3893-45b7-bc4e-60bb428dd00b" name="Default" comment="1">
+    <list default="true" id="5c833d0b-3893-45b7-bc4e-60bb428dd00b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/danu.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/och.mp3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/chat.jsp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/js/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ChatServer.war" afterPath="$PROJECT_DIR$/target/ChatServer.war" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/ChatServer/WEB-INF/classes/Server.class" afterPath="$PROJECT_DIR$/target/ChatServer/WEB-INF/classes/Server.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/Server.class" afterPath="$PROJECT_DIR$/target/classes/Server.class" />
@@ -31,34 +35,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Login.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/net.server/Login.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="68" column="53" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/net.server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="84" column="17" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -952,7 +934,7 @@
       <workItem from="1465675121385" duration="2800000" />
       <workItem from="1465677930647" duration="24000" />
       <workItem from="1465678068158" duration="4796000" />
-      <workItem from="1465717451213" duration="4126000" />
+      <workItem from="1465717451213" duration="5557000" />
     </task>
     <task id="LOCAL-00001" summary="chat.jsp&#10;autocomplete=&quot;off&quot;&#10;form.method=&quot;post&quot;">
       <created>1461255079815</created>
@@ -989,11 +971,18 @@
       <option name="project" value="LOCAL" />
       <updated>1465680638349</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Подправил баг с новыми пользователями">
+      <created>1465721956574</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1465721956574</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77627000" />
+    <option name="totallyTimeSpent" value="79058000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1053,7 +1042,8 @@
     <MESSAGE value="Chat can write message" />
     <MESSAGE value="chat.jsp&#10;autocomplete=&quot;off&quot;&#10;form.method=&quot;post&quot;" />
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="Подправил баг с новыми пользователями" />
+    <option name="LAST_COMMIT_MESSAGE" value="Подправил баг с новыми пользователями" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1403,21 +1393,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/net.server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1845">
+          <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/net.server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="84" column="17" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

@@ -109,6 +109,7 @@ public class Server {
     @OnClose
     public void onClose(Session session, @PathParam("nick") String nick) {
         users.remove(new User(nick, null));
+        allMessages.add("Boo");
         System.out.printf(nick + " leave chat!");
     }
 
