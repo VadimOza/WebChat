@@ -73,17 +73,17 @@ public class Server {
         try {
             if (users.contains(new User(nick, null))) {
                 writer.sendText("NO!");
-
-
             } else {
                 users.add(new User(nick, session));
-                allMessages.add("{{newuser}}" + nick + "{{/newuser}}{{date}}" + getDate() + "{{/date}}");
+                String newuser = "{{newuser}}" + nick + "{{/newuser}}{{date}}" + getDate() + "{{/date}}";
                 for (String str :
                         allMessages) {
                     session.getBasicRemote().sendText(str);
                 }
-
-
+                for (User user : users) {
+                    user.send(newuser);
+                }
+                allMessages.add(newuser);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -110,7 +110,6 @@ public class Server {
     public void onClose(Session session, @PathParam("nick") String nick) {
         users.remove(new User(nick, null));
         System.out.printf(nick + " leave chat!");
-
     }
 
     @OnError
