@@ -14,7 +14,7 @@ h2 {
     height: 50px;
     width: 100%;
     font-size: 18px;
-    background: #18aa8d;
+    background: #6A6C75;
     color: white;
     line-height: 150%;
     border-radius: 3px 3px 0 0;
@@ -37,31 +37,31 @@ form h2 {
 }
 
 /*Логин*/
-input {
+.username {
     margin: 40px 25px;
     width: 200px;
     display: block;
     border: none;
     padding: 10px 0;
-    border-bottom: solid 1px #1abc9c;
+    border-bottom: solid 1px #6A6C75;
     -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
     transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #1abc9c 4%);
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, #6A6C75 4%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, #6A6C75 4%);
     background-position: -200px 0;
     background-size: 200px 100%;
     background-repeat: no-repeat;
     color: #0e6252;
 }
 
-input:focus, input:valid {
+.username:focus, .username:valid {
     box-shadow: none;
     outline: none;
     background-position: 0 0;
 }
 
-input:focus::-webkit-input-placeholder, input:valid::-webkit-input-placeholder {
-    color: #1abc9c;
+.username:focus::-webkit-input-placeholder, .username:valid::-webkit-input-placeholder {
+    color: #6A6C75;
     font-size: 11px;
     -webkit-transform: translateY(-20px);
     transform: translateY(-20px);
@@ -72,7 +72,7 @@ input:focus::-webkit-input-placeholder, input:valid::-webkit-input-placeholder {
 button {
     outline: none;
     border: none;
-    background: #1abc9c;
+    background: #6A6C75;
     cursor: pointer;
     border-radius: 3px;
     padding: 6px;

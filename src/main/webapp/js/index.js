@@ -59,6 +59,10 @@ function writeResponse(text) {
 
         this.$chatHistoryList.append(template(context));
         this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
+        document.getElementById("sound").innerHTML = '<audio ' +
+            'autoplay="autoplay"><source src="new_user.mp3" type="audio/mpeg" />' +
+            '<embed hidden="true" autostart="true" loop="false" src="new_user.mp3" />' +
+            '</audio>';
     } else {
         var user = text.substr(text.indexOf('{{username}}') + 12, text.indexOf('{{/username}}') - 12);
         var message = text.substring(text.indexOf('{{mes}}') + 7, text.indexOf('{{mesend}}'));
