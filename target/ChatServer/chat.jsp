@@ -53,7 +53,7 @@
         </div> <!-- end chat-header -->
 
         <div class="chat-history">
-            <ul>
+            <ul id="m">
                 <%--Message--%>
             </ul>
 
@@ -134,78 +134,29 @@
         </div>
     </li>
 </script>
-
-<%--<script type="text/javascript">--%>
-        <%--var webSocket;--%>
-        <%--var messages = document.getElementById("messages");--%>
-
-
-        <%--function openSocket(){--%>
-            <%--// Ensures only one connection is open at a time--%>
-            <%--if(webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED){--%>
-                <%--writeResponse("WebSocket is already opened.");--%>
-                <%--return;--%>
-            <%--}--%>
-            <%--// Create a new instance of the websocket--%>
-            <%--var nick = localStorage.getItem("_nick");--%>
-            <%--var url = "ws://localhost:27015/server/"+nick;--%>
-            <%--webSocket = new WebSocket(url);--%>
-    <%----%>
-            <%--/**--%>
-             <%--* Binds functions to the listeners for the websocket.--%>
-             <%--*/--%>
-            <%--webSocket.onopen = function(event){--%>
-                <%--// For reasons I can't determine, onopen gets called twice--%>
-                <%--// and the first time event.data is undefined.--%>
-                <%--// Leave a comment if you know the answer.--%>
-                <%--if(event.data === undefined)--%>
-                    <%--return;--%>
-                <%--if(event.data === "NO!"){--%>
-                    <%--webSocket.close();--%>
-                    <%--window.location="http://localhost:27015/login.jsp";--%>
-                <%--}--%>
-                <%--writeResponse(event.data);--%>
-            <%--};--%>
-    <%----%>
-            <%--webSocket.onmessage = function(event){--%>
-                <%--writeResponse(event.data);--%>
-            <%--};--%>
-    <%----%>
-            <%--webSocket.onclose = function(event){--%>
-                <%--writeResponse("Connection closed");--%>
-            <%--};--%>
-        <%--}--%>
-        <%--function send(){--%>
-            <%--var text = document.getElementById("message-to-send").value;--%>
-            <%--document.getElementById("message-to-send").value = "";--%>
-            <%--webSocket.send(text);--%>
-        <%--}--%>
-    <%----%>
-        <%--function closeSocket(){--%>
-            <%--webSocket.close();--%>
-        <%--}--%>
-
-        <%--function writeResponse(text){--%>
-            <%--var templateResponse = Handlebars.compile($("#message-response-template").html());--%>
-            <%--var contextResponse = {--%>
-                <%--response: text,--%>
-                <%--time: 0,--%>
-                <%--day: 0--%>
-            <%--};--%>
-    <%----%>
-    <%----%>
-            <%--this.$chatHistory = $('.chat-history');--%>
-            <%--this.$chatHistoryList = this.$chatHistory.find('ul');--%>
-    <%----%>
-            <%--this.$chatHistoryList.append(templateResponse(contextResponse));--%>
-            <%--this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);--%>
-        <%--}--%>
-<%--</script>--%>
-
 <script src='js/jquery.min.js'></script>
 <script src='js/handlebars.min.js'></script>
 <script src='js/list.min.js'></script>
 <script src="js/index.js"></script>
+<script src="//twemoji.maxcdn.com/twemoji.min.js"></script>
+
+<script type="text/javascript">
+//    var div = document.createElement('div');
+//    div.textContent = 'I \u2764\uFE0F emoji!';
+//    document.body.appendChild(div);
+//
+//    twemoji.parse(document.body);
+//
+//    var img = div.querySelector('img');
+//
+//    // note the div is preserved
+//    img.parentNode === div; // true
+//
+//    img.src;        // abs.twimg.com/emoji/v1/36x36/2764.png
+//    img.alt;        // \u2764\uFE0F
+//    img.class;      // emoji
+//    img.draggable;  // false
+</script>
 
 </body>
 </html>

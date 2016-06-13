@@ -21,8 +21,12 @@
 
 <form>
     <h2>Login</h2>
+    <div class="user-img">
+        <div></div>
+        <img class="centered-and-cropped" width="100" height="100" style="border-radius:50%" src="//goo.gl/2WnLrL" alt="Bear">
+        <div></div>
+    </div>
     <input id="username" name="username" placeholder="Username" type="text" required>
-    <input type="file" name="file1">
     <label hidden>Male</label>
     <button onclick="openSocket();"> Login  </button>
     <script type="text/javascript">

@@ -83,9 +83,14 @@ function writeResponse(text) {
 
         this.$chatHistoryList.append(templateResponse(contextResponse));
         this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
+        if (user.localeCompare(usrnm)) {
+            document.getElementById("sound").innerHTML = '<audio ' +
+                'autoplay="autoplay"><source src="new_message.mp3" type="audio/mpeg" />' +
+                '<embed hidden="true" autostart="true" loop="false" src="new_message.mp3" />' +
+                '</audio>';
+        }
     }
-}
-;
+};
 
 (function () {
     var chat = {
